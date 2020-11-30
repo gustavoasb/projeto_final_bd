@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  birth_date: 2020-11-30
+  hiring_date: 2020-11-30
+  unit: one
+
+two:
+  name: MyString
+  birth_date: 2020-11-30
+  hiring_date: 2020-11-30
+  unit: two

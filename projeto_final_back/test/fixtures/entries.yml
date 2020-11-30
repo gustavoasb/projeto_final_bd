@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  was_attended: false
+  arrival_time: 2020-11-30 18:40:43
+  user_cpf: MyString
+  doctor_crm: MyString
+  health_condition: one
+
+two:
+  was_attended: false
+  arrival_time: 2020-11-30 18:40:43
+  user_cpf: MyString
+  doctor_crm: MyString
+  health_condition: two
