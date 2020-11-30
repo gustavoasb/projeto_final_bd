@@ -1,2 +1,3 @@
 class HealthCondition < ApplicationRecord
+    
 end
