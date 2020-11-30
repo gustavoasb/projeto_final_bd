@@ -15,110 +15,118 @@ ActiveRecord::Schema.define(version: 0) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "atendente", primary_key: "cpf", id: :string, limit: 45, force: :cascade do |t|
-    t.string "nome", limit: 45, null: false
-    t.integer "unidade_id", null: false
-    t.integer "unidade_hospital_id", null: false
+  create_table "addresses", id: :serial, force: :cascade do |t|
+    t.string "cep", limit: 20, null: false
+    t.string "street", limit: 45, null: false
+    t.integer "number", null: false
+    t.string "complement", limit: 45
+    t.integer "district_id", null: false
   end
 
-  create_table "bairro", id: :serial, force: :cascade do |t|
-    t.string "nome", limit: 45, null: false
-    t.integer "cidade_id", null: false
+  create_table "attendants", primary_key: "cpf", id: :string, limit: 45, force: :cascade do |t|
+    t.string "name", limit: 45, null: false
+    t.date "birth_date", null: false
+    t.date "hiring_date", null: false
+    t.integer "unit_id", null: false
   end
 
-  create_table "cidade", id: :serial, force: :cascade do |t|
-    t.string "nome", limit: 45, null: false
+  create_table "cities", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 45, null: false
     t.integer "uf_id", null: false
   end
 
-  create_table "endereco", id: :serial, force: :cascade do |t|
-    t.string "cep", limit: 20, null: false
-    t.string "rua", limit: 45, null: false
-    t.integer "numero", null: false
-    t.string "complemento", limit: 45
+  create_table "districts", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 45, null: false
+    t.integer "city_id", null: false
   end
 
-  create_table "entrada", id: :serial, force: :cascade do |t|
-    t.boolean "foi_atendido", null: false
-    t.datetime "horario_chegada", null: false
-    t.string "usuario_cpf", limit: 45, null: false
-    t.string "medico_crm", limit: 45, null: false
-    t.integer "estado_saude_id", null: false
+  create_table "doctor_has_specialization", primary_key: ["doctor_crm", "specialization_id"], force: :cascade do |t|
+    t.string "doctor_crm", limit: 45, null: false
+    t.integer "specialization_id", null: false
   end
 
-  create_table "entrada_has_sintoma", primary_key: ["entrada_id", "sintoma_id"], force: :cascade do |t|
-    t.integer "entrada_id", null: false
-    t.integer "sintoma_id", null: false
+  create_table "doctors", primary_key: "crm", id: :string, limit: 45, force: :cascade do |t|
+    t.string "name", limit: 45, null: false
+    t.string "room", limit: 45, null: false
+    t.integer "unit_id", null: false
   end
 
-  create_table "especializacao", id: :serial, force: :cascade do |t|
-    t.string "nome", limit: 45, null: false
+  create_table "entries", id: :serial, force: :cascade do |t|
+    t.boolean "was_attended", null: false
+    t.datetime "arrival_time", null: false
+    t.string "user_cpf", limit: 45, null: false
+    t.string "doctor_crm", limit: 45, null: false
+    t.integer "health_condition_id", null: false
   end
 
-  create_table "estado_saude", id: :serial, force: :cascade do |t|
-    t.string "nome", limit: 45, null: false
-    t.integer "prioridade", null: false
+  create_table "entry_has_symptom", primary_key: ["entry_id", "symptom_id"], force: :cascade do |t|
+    t.integer "entry_id", null: false
+    t.integer "symptom_id", null: false
   end
 
-  create_table "hospital", id: :serial, force: :cascade do |t|
-    t.string "sigla", limit: 10, null: false
-    t.string "nome", limit: 35, null: false
+  create_table "health_conditions", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 45, null: false
+    t.integer "priority", null: false
   end
 
-  create_table "medico", primary_key: "crm", id: :string, limit: 45, force: :cascade do |t|
-    t.string "nome", limit: 45, null: false
-    t.string "sala", limit: 45, null: false
-    t.integer "unidade_id", null: false
-    t.integer "unidade_hospital_id", null: false
+  create_table "hospitals", id: :serial, force: :cascade do |t|
+    t.string "abbreviation", limit: 10, null: false
+    t.string "name", limit: 35, null: false
   end
 
-  create_table "medico_has_especializacao", primary_key: ["medico_crm", "especializacao_id"], force: :cascade do |t|
-    t.string "medico_crm", limit: 45, null: false
-    t.integer "especializacao_id", null: false
+  create_table "notifications", id: :serial, force: :cascade do |t|
+    t.string "message", limit: 100, null: false
+    t.datetime "sent_at", null: false
+    t.string "user_cpf", limit: 45, null: false
+    t.integer "entry_id"
   end
 
-  create_table "sintoma", id: :serial, force: :cascade do |t|
-    t.string "nome", limit: 45, null: false
+  create_table "specializations", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 45, null: false
+    t.integer "year", null: false
   end
 
-  create_table "telefone", primary_key: ["id", "usuario_cpf"], force: :cascade do |t|
-    t.serial "id", null: false
-    t.string "usuario_cpf", limit: 45, null: false
-    t.string "numero", limit: 45, null: false
+  create_table "symptoms", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 45, null: false
   end
 
-  create_table "uf", id: :serial, force: :cascade do |t|
-    t.string "nome", limit: 2, null: false
-    t.integer "endereco_id", null: false
+  create_table "telephones", id: :serial, force: :cascade do |t|
+    t.string "cell_phone", limit: 45, null: false
+    t.string "home_phone", limit: 45, null: false
   end
 
-  create_table "unidade", primary_key: ["id", "hospital_id"], force: :cascade do |t|
-    t.serial "id", null: false
+  create_table "ufs", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 2, null: false
+  end
+
+  create_table "units", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 45, null: false
     t.integer "hospital_id", null: false
-    t.string "nome", limit: 45, null: false
-    t.integer "endereco_id", null: false
+    t.integer "address_id", null: false
   end
 
-  create_table "usuario", primary_key: "cpf", id: :string, limit: 45, force: :cascade do |t|
-    t.string "nome", limit: 45, null: false
+  create_table "users", primary_key: "cpf", id: :string, limit: 45, force: :cascade do |t|
+    t.string "name", limit: 45, null: false
     t.string "email", limit: 45, null: false
-    t.date "data_nascimento", null: false
+    t.date "birth_date", null: false
+    t.integer "telephone_id", null: false
   end
 
-  add_foreign_key "atendente", "hospital", column: "unidade_hospital_id", name: "atendente_unidade_hospital_id_fkey"
-  add_foreign_key "atendente", "hospital", column: "unidade_id", name: "atendente_unidade_id_fkey"
-  add_foreign_key "bairro", "cidade", name: "bairro_cidade_id_fkey"
-  add_foreign_key "cidade", "uf", name: "cidade_uf_id_fkey"
-  add_foreign_key "entrada", "estado_saude", name: "entrada_estado_saude_id_fkey"
-  add_foreign_key "entrada", "medico", column: "medico_crm", primary_key: "crm", name: "entrada_medico_crm_fkey"
-  add_foreign_key "entrada", "usuario", column: "usuario_cpf", primary_key: "cpf", name: "entrada_usuario_cpf_fkey"
-  add_foreign_key "entrada_has_sintoma", "entrada", name: "entrada_has_sintoma_entrada_id_fkey"
-  add_foreign_key "entrada_has_sintoma", "sintoma", name: "entrada_has_sintoma_sintoma_id_fkey"
-  add_foreign_key "medico", "unidade", name: "medico_unidade_id_fkey"
-  add_foreign_key "medico_has_especializacao", "especializacao", name: "medico_has_especializacao_especializacao_id_fkey"
-  add_foreign_key "medico_has_especializacao", "medico", column: "medico_crm", primary_key: "crm", name: "medico_has_especializacao_medico_crm_fkey"
-  add_foreign_key "telefone", "usuario", column: "usuario_cpf", primary_key: "cpf", name: "telefone_usuario_cpf_fkey"
-  add_foreign_key "uf", "endereco", name: "uf_endereco_id_fkey"
-  add_foreign_key "unidade", "endereco", name: "unidade_endereco_id_fkey"
-  add_foreign_key "unidade", "hospital", name: "unidade_hospital_id_fkey"
+  add_foreign_key "addresses", "districts", name: "addresses_district_id_fkey"
+  add_foreign_key "attendants", "hospitals", column: "unit_id", name: "attendants_unit_id_fkey"
+  add_foreign_key "cities", "ufs", name: "cities_uf_id_fkey"
+  add_foreign_key "districts", "cities", name: "districts_city_id_fkey"
+  add_foreign_key "doctor_has_specialization", "doctors", column: "doctor_crm", primary_key: "crm", name: "doctor_has_specialization_doctor_crm_fkey"
+  add_foreign_key "doctor_has_specialization", "specializations", name: "doctor_has_specialization_specialization_id_fkey"
+  add_foreign_key "doctors", "units", name: "doctors_unit_id_fkey"
+  add_foreign_key "entries", "doctors", column: "doctor_crm", primary_key: "crm", name: "entries_doctor_crm_fkey"
+  add_foreign_key "entries", "health_conditions", name: "entries_health_condition_id_fkey"
+  add_foreign_key "entries", "users", column: "user_cpf", primary_key: "cpf", name: "entries_user_cpf_fkey"
+  add_foreign_key "entry_has_symptom", "entries", name: "entry_has_symptom_entry_id_fkey"
+  add_foreign_key "entry_has_symptom", "symptoms", name: "entry_has_symptom_symptom_id_fkey"
+  add_foreign_key "notifications", "entries", name: "notifications_entry_id_fkey"
+  add_foreign_key "notifications", "users", column: "user_cpf", primary_key: "cpf", name: "notifications_user_cpf_fkey"
+  add_foreign_key "units", "addresses", name: "units_address_id_fkey"
+  add_foreign_key "units", "hospitals", name: "units_hospital_id_fkey"
+  add_foreign_key "users", "telephones", name: "users_telephone_id_fkey"
 end
