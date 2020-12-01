@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "entries", id: :serial, force: :cascade do |t|
-    t.boolean "was_attended", null: false
-    t.datetime "arrival_time", null: false
+    t.boolean "was_attended", default: false, null: false
+    t.datetime "arrival_time", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.string "user_cpf", limit: 45, null: false
     t.string "doctor_crm", limit: 45, null: false
     t.integer "health_condition_id", null: false
@@ -72,18 +72,18 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "hospitals", id: :serial, force: :cascade do |t|
     t.string "abbreviation", limit: 10, null: false
     t.string "name", limit: 35, null: false
+    t.index ["name"], name: "hospitals_name_key", unique: true
   end
 
   create_table "notifications", id: :serial, force: :cascade do |t|
     t.string "message", limit: 100, null: false
-    t.datetime "sent_at", null: false
+    t.datetime "sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.string "user_cpf", limit: 45, null: false
     t.integer "entry_id"
   end
 
   create_table "specializations", id: :serial, force: :cascade do |t|
     t.string "name", limit: 45, null: false
-    t.integer "year", null: false
   end
 
   create_table "symptoms", id: :serial, force: :cascade do |t|
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 0) do
 
   create_table "ufs", id: :serial, force: :cascade do |t|
     t.string "name", limit: 2, null: false
+    t.index ["name"], name: "ufs_name_key", unique: true
   end
 
   create_table "units", id: :serial, force: :cascade do |t|
