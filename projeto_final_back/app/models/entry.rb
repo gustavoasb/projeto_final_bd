@@ -1,5 +1,8 @@
 class Entry < ApplicationRecord
   belongs_to :health_condition
-  has_many :symptom, :through => :entry_has_symptom
-  has_many :symptom
+  belongs_to :doctor
+  belongs_to :user
+  has_many :notifications
+  has_many :symptoms, :through => :entry_has_symptoms
+  has_many :symptoms
 end
