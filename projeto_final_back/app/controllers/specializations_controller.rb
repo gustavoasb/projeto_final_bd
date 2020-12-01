@@ -46,6 +46,6 @@ class SpecializationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def specialization_params
-      params.require(:specialization).permit(:name, :year)
+      params.require(:specialization).permit(:name)
     end
 end
