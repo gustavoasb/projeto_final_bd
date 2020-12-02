@@ -24,11 +24,11 @@ Para evitar aglomerações nas emergências de hospitais, após o primeiro atend
 ### Detalhes do Projeto
 
 
-### Modelo Entidade Relacionamento
+#### Modelo Entidade Relacionamento
 
 ![Modelo ER](https://i.imgur.com/9qvXqJ1.png)
 
-### Modelo Relacional
+#### Modelo Relacional
 
 ![Modelo Relacional](https://i.imgur.com/rpNxmiD.png)
 
