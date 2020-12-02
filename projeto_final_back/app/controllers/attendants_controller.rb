@@ -3,14 +3,16 @@ class AttendantsController < ApplicationController
 
   # GET /attendants
   def index
-    @attendants = Attendant.all
-
-    render json: @attendants
+    data = Attendant.all.map do |attendant|
+      {name: attendant.name, cpf: CPF.new(attendant.cpf).formatted, birth_date: attendant.birth_date, hiring_date: attendant.hiring_date, unit_id: attendant.unit_id}
+    end
+  render json: data, status: :ok
   end
 
   # GET /attendants/1
   def show
-    render json: @attendant
+    data = {name: @attendant.name, cpf: CPF.new(@attendant.cpf).formatted, birth_date: @attendant.birth_date, hiring_date: @attendant.hiring_date, unit_id: @attendant.unit_id}
+    render json: data, status: :ok
   end
 
   # POST /attendants
@@ -27,7 +29,7 @@ class AttendantsController < ApplicationController
   # PATCH/PUT /attendants/1
   def update
     if @attendant.update(attendant_params)
-      render json: @attendant
+      render json: @attendant, status: :ok
     else
       render json: @attendant.errors, status: :unprocessable_entity
     end
@@ -46,6 +48,6 @@ class AttendantsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def attendant_params
-      params.require(:attendant).permit(:name, :birth_date, :hiring_date, :unit_id)
+      params.require(:attendant).permit(:cpf, :name, :birth_date, :hiring_date, :unit_id)
     end
 end

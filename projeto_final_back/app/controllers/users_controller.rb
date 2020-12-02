@@ -3,14 +3,16 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
-
-    render json: @users
+    data = User.all.map do |user|
+      {name: user.name, email: user.email, cpf: CPF.new(user.cpf).formatted, birth_date: user.birth_date, telephone_id: user.telephone_id}
+    end
+    render json: data, status: :ok
   end
 
   # GET /users/1
   def show
-    render json: @user
+    data = {name: @user.name, email: @user.email, cpf: CPF.new(@user.cpf).formatted, birth_date: @user.birth_date, telephone_id: @user.telephone_id}
+    render json: data, status: :ok
   end
 
   # POST /users
@@ -27,7 +29,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      render json: @user
+      render json: @user, status: :ok
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -46,6 +48,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :email, :birth_date, :telephone_id)
+      params.require(:user).permit(:cpf, :name, :email, :birth_date, :telephone_id)
     end
 end

@@ -5,18 +5,19 @@ class EntriesController < ApplicationController
   def index
     @entries = Entry.all
 
-    render json: @entries
+    render json: @entries, status: :ok
   end
 
   # GET /entries/1
   def show
-    render json: @entry
+    render json: @entry, status: :ok
   end
 
   # POST /entries
   def create
     @entry = Entry.new(entry_params)
-
+    @entry.arrival_time = Time.now
+    
     if @entry.save
       render json: @entry, status: :created, location: @entry
     else
@@ -27,7 +28,7 @@ class EntriesController < ApplicationController
   # PATCH/PUT /entries/1
   def update
     if @entry.update(entry_params)
-      render json: @entry
+      render json: @entry, status: :ok
     else
       render json: @entry.errors, status: :unprocessable_entity
     end
