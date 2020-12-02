@@ -16,7 +16,8 @@ class NotificationsController < ApplicationController
   # POST /notifications
   def create
     @notification = Notification.new(notification_params)
-
+    @notification.sent_at = Time.now
+    
     if @notification.save
       render json: @notification, status: :created, location: @notification
     else
