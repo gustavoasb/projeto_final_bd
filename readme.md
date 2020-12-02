@@ -17,8 +17,22 @@ Para evitar aglomerações nas emergências de hospitais, após o primeiro atend
 * [Postgres] - SGBD onde foi criado o banco
 * [MaterialUI] - UI para o front-end
 * [Git] - Para o controle de versionamento, inclusive você está vendo isso no GitHub agora :)
+* [pgAdmin] - Ferramenta que auxilia no gerenciamento de databases do Postgres
+* [ERDplus] - Utilizado para moldar o diagrama de Entidade Relacionamento
+* [MySqlWorkbench] - Utilizado para moldar o Modelo Relacional
 
 ### Detalhes do Projeto
+
+
+### Modelo Entidade Relacionamento
+
+![Modelo ER](https://i.imgur.com/9qvXqJ1.png)
+
+### Modelo Relacional
+
+![Modelo Relacional](https://i.imgur.com/rpNxmiD.png)
+
+#### Configurando o banco no rails
 
 Para gerar o schema dentro do rails utilize o seguinte comando
 ```sh
@@ -33,3 +47,8 @@ rails db:schema:dump
    [Postgres]: <https://www.postgresql.org/>
    [MaterialUI]: <https://material-ui.com/>
    [Git]: <https://git-scm.com/>
+   [pgAdmin]: <https://www.pgadmin.org/>
+   [ERDplus]: <https://erdplus.com/>
+   [MySqlWorkbench]: <https://www.mysql.com/products/workbench/>
+
+
