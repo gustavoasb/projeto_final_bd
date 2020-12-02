@@ -3,14 +3,17 @@ class EntriesController < ApplicationController
 
   # GET /entries
   def index
-    @entries = Entry.all
-
-    render json: @entries, status: :ok
+    data = Entry.all.map do |entry| 
+      {id: entry.id, user_cpf: CPF.new(entry.user_cpf).formatted, doctor_crm: entry.doctor_crm, arrival_time: entry.arrival_time.strftime("%d/%m/%Y %H:%M"), was_attended: entry.was_attended, health_condition_id: entry.health_condition_id}
+    end
+    render json: data, status: :ok
   end
 
   # GET /entries/1
   def show
-    render json: @entry, status: :ok
+    data = {id: @entry.id, user_cpf: CPF.new(@entry.user_cpf).formatted, doctor_crm: @entry.doctor_crm, arrival_time: @entry.arrival_time.strftime("%d/%m/%Y %H:%M"), was_attended: @entry.was_attended, health_condition_id: @entry.health_condition_id}
+
+    render json: data, status: :ok
   end
 
   # POST /entries
