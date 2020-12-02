@@ -4,14 +4,14 @@ class UsersController < ApplicationController
   # GET /users
   def index
     data = User.all.map do |user|
-      {name: user.name, email: user.email, cpf: CPF.new(user.cpf).formatted, birth_date: user.birth_date, telephone_id: user.telephone_id}
+      {cpf: CPF.new(user.cpf).formatted, name: user.name, email: user.email, birth_date: user.birth_date, telephone_id: user.telephone_id}
     end
     render json: data, status: :ok
   end
 
   # GET /users/1
   def show
-    data = {name: @user.name, email: @user.email, cpf: CPF.new(@user.cpf).formatted, birth_date: @user.birth_date, telephone_id: @user.telephone_id}
+    data = {cpf: CPF.new(@user.cpf).formatted, name: @user.name, email: @user.email, birth_date: @user.birth_date.strftime("%d/%m/%Y"), telephone_id: @user.telephone_id}
     render json: data, status: :ok
   end
 

@@ -4,14 +4,14 @@ class AttendantsController < ApplicationController
   # GET /attendants
   def index
     data = Attendant.all.map do |attendant|
-      {name: attendant.name, cpf: CPF.new(attendant.cpf).formatted, birth_date: attendant.birth_date, hiring_date: attendant.hiring_date, unit_id: attendant.unit_id}
+      {name: attendant.name, cpf: CPF.new(attendant.cpf).formatted, birth_date: attendant.birth_date.strftime("%d/%m/%Y"), hiring_date: attendant.hiring_date.strftime("%d/%m/%Y"), unit_id: attendant.unit_id}
     end
   render json: data, status: :ok
   end
 
   # GET /attendants/1
   def show
-    data = {name: @attendant.name, cpf: CPF.new(@attendant.cpf).formatted, birth_date: @attendant.birth_date, hiring_date: @attendant.hiring_date, unit_id: @attendant.unit_id}
+    data = {name: @attendant.name, cpf: CPF.new(@attendant.cpf).formatted, birth_date: @attendant.birth_date.strftime("%d/%m/%Y"), hiring_date: @attendant.hiring_date.strftime("%d/%m/%Y"), unit_id: @attendant.unit_id}
     render json: data, status: :ok
   end
 

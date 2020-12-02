@@ -3,14 +3,17 @@ class NotificationsController < ApplicationController
 
   # GET /notifications
   def index
-    @notifications = Notification.all
-
-    render json: @notifications
+    data = Notification.all.map do |notification|
+      {id: notification.id, message: notification.message, sent_at: notification.sent_at.strftime("%d/%m/%Y %H:%M"), user_cpf: CPF.new(notification.user_cpf).formatted, entry_id: notification.entry_id}
+    end
+    render json: data
   end
 
   # GET /notifications/1
   def show
-    render json: @notification
+    data = {id: @notification.id, message: @notification.message, sent_at: @notification.sent_at.strftime("%d/%m/%Y %H:%M"), user_cpf: CPF.new(@notification.user_cpf).formatted, entry_id: @notification.entry_id}
+    
+    render json: data
   end
 
   # POST /notifications
