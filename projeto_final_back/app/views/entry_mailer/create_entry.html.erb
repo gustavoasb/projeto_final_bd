@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h2 style="font-weight: normal">Sua entrada foi registrada com sucesso, <%= @user.name %></h2>
+    <p>
+      Fique ligado(a) no seu telefone e email,
+      Doutor(a) <%= @doctor.name %> irá lhe chamar o mais rápido possível.<br>
+    </p>
+    <p>
+      Horário de chegada <%= @entry.arrival_time.strftime("%H:%M %d/%m/%Y") %>.
+    </p>
+  </body>
+</html>

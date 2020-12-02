@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h2 style="font-weight: normal">Estamos te aguardando na sala de atendimento, <%= @user.name %></h2>
+    <p>
+      Doutor(a) <%= @doctor.name %> está te esperando,
+      se dirija a sala <%= @doctor.room %>.<br>
+    </p>
+    <p>
+      Horário de chegada <%= @entry.arrival_time.strftime("%H:%M %d/%m/%Y") %>.
+      Horário que foi chamado <%= Time.now.strftime("%H:%M %d/%m/%Y") %>.
+    </p>
+  </body>
+</html>

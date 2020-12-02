@@ -1,0 +1,9 @@
+Estamos te aguardando na sala de atendimento, <%= @user.name %>
+===============================================
+
+Doutor(a) <%= @doctor.name %> está te esperando,
+se dirija a sala <%= @doctor.room %>.
+
+ 
+Horário de chegada <%= @entry.arrival_time.strftime("%H:%M %d/%m/%Y") %>.
+Horário que foi chamado <%= Time.now.strftime("%H:%M %d/%m/%Y") %>.

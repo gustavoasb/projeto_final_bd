@@ -19,6 +19,7 @@ class EntriesController < ApplicationController
     @entry.arrival_time = Time.now
     
     if @entry.save
+      EntryMailer.with(user: @entry.user, entry: @entry, doctor: @entry.doctor, health_condition: @entry.health_condition).create_entry.deliver_later
       render json: @entry, status: :created, location: @entry
     else
       render json: @entry.errors, status: :unprocessable_entity
@@ -37,6 +38,12 @@ class EntriesController < ApplicationController
   # DELETE /entries/1
   def destroy
     @entry.destroy
+  end
+
+  # POST /entry_notification/
+  def send_notification
+    @entry = Entry.find(params[:entry_id])
+    EntryMailer.with(user: @entry.user, entry: @entry, doctor: @entry.doctor, health_condition: @entry.health_condition).chamado_para_atendimento.deliver_later
   end
 
   private
