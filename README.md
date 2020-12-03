@@ -52,7 +52,7 @@ SMTP_PASSWORD=<senha_do_email>
 
 #### Testando o banco sem utilizar o front
 
-A fim de testar a manipulação dos dados do banco, abra o back na porta 3000 (padrão do Rails) e utilize o [Insomnia] para fazer as requisições. Um arquivo com todas as requisições do Insomnia está presente no projeto.
+A fim de testar a manipulação dos dados do banco, abra o back na porta 3000 (padrão do Rails) e utilize o [Insomnia] para fazer as requisições. Um arquivo com todas as requisições está presente no projeto, apenas faça a importação deste para dentro do seu Insomnia e realize os testes.
 
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
