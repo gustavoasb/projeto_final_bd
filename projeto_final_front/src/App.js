@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home"
 import Login from "./pages/Login"
+import LoginUser from "./pages/LoginUser"
+import LoginDoctor from "./pages/LoginDoctor"
 import Admin from "./pages/Admin"
 import Doctor from "./pages/Doctor"
 import SignUp from "./pages/SignUp"
@@ -17,7 +19,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/user" >
+        <Route exact path="/user" >
           <Home />
         </Route>
         <Route exact path="/">
@@ -44,8 +46,14 @@ function App() {
         <Route path="/notification">
           <Hospital />
         </Route>
-        <Route path="/user_entries">
+        <Route exact path="/user_entries">
           <Entries />
+        </Route>
+        <Route exact path="/login_user">
+          <LoginUser />
+        </Route>
+        <Route exact path="/login_doctor">
+          <LoginDoctor />
         </Route>
       </Switch>
     </Router>

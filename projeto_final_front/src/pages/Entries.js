@@ -25,12 +25,14 @@ export default function Entries() {
   const cpf = localStorage.getItem("user-cpf");
 
   function isFromUser(value) {
-    if(value.health_condition_id === 1){
-        leveCounter += 1
-        value.posicao = leveCounter
-    } else{
-        graveCounter += 1
-        value.posicao = graveCounter
+    if(!value.was_attended){
+        if(value.health_condition_id === 1){
+            leveCounter += 1
+            value.posicao = leveCounter
+        } else{
+            graveCounter += 1
+            value.posicao = graveCounter
+        }
     }
     if (value.user_cpf.replace(/[^\w\s]/gi, '') === cpf) {
       return value;
@@ -66,6 +68,7 @@ export default function Entries() {
                 <TableCell>CRM do Doutor</TableCell>
                 <TableCell align="right">Hora de chegada</TableCell>
                 <TableCell align="right">Posição na Fila</TableCell>
+                <TableCell align="right">Fila</TableCell>
                 <TableCell align="right">Atendido</TableCell>
               </TableRow>
             </TableHead>
@@ -77,6 +80,7 @@ export default function Entries() {
                   </TableCell>
                   <TableCell align="right">{row.arrival_time}</TableCell>
                   <TableCell align="right">{row.was_attended ? "" : row.posicao}</TableCell>
+                  <TableCell align="right">{row.health_condition_id === 1 ? "Comum" : "Preferencial"}</TableCell>
                   <TableCell align="right">
                     {row.was_attended ? "Sim" : "Não"}
                   </TableCell>
