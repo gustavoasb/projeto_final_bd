@@ -11,6 +11,7 @@ import Admin from "./pages/Admin"
 import Doctor from "./pages/Doctor"
 import SignUp from "./pages/SignUp"
 import Hospital from "./pages/Hospital"
+import Entries from "./pages/Entries"
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="/user" >
           <Home />
         </Route>
-        <Route path="/" exact>
+        <Route exact path="/">
           <Login />
         </Route>
         <Route path="/admin">
@@ -42,6 +43,9 @@ function App() {
         </Route>
         <Route path="/notification">
           <Hospital />
+        </Route>
+        <Route path="/user_entries">
+          <Entries />
         </Route>
       </Switch>
     </Router>

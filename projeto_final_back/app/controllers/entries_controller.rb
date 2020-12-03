@@ -19,7 +19,7 @@ class EntriesController < ApplicationController
   # POST /entries
   def create
     @entry = Entry.new(entry_params)
-    @entry.arrival_time = Time.now
+    # @entry.arrival_time = Time.now
     
     if @entry.save
       EntryMailer.with(user: @entry.user, entry: @entry, doctor: @entry.doctor, health_condition: @entry.health_condition).create_entry.deliver_later

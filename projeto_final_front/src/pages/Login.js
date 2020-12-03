@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import ExitToApp from '@material-ui/icons/ExitToApp';
+import api from '../services/api'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,8 +23,18 @@ export default function Login() {
   let history = useHistory()
 
   function handleSubmit(){
-    localStorage.setItem("user-cpf", cpf)
-    history.push("/user")
+    console.log("oi")
+    api.get(`users/${cpf}`)
+      .then(res => {
+        console.log(res)
+        localStorage.setItem("user-cpf", cpf)
+        localStorage.setItem("user-name", res.data.name)
+        history.push("/user")
+      })
+      .catch(res => {
+        console.log(res)
+        alert("CPF não encontrado")
+      })
   }
 
   return (
@@ -40,7 +51,7 @@ export default function Login() {
         <div style={{ fontSize: "1.2rem", marginBottom: "0.6rem" }}>
           Faça login
         </div>
-        <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <form className={classes.root} noValidate autoComplete="off">
           <TextField
             id="outlined-basic"
             label="CPF"
@@ -49,9 +60,8 @@ export default function Login() {
             value={cpf}
             onChange={e => setCpf(e.target.value)}
           />
-          <Button color="primary" type="submit" startIcon={<ExitToApp />}>Logar</Button>
+          <Button color="primary" onClick={() => handleSubmit()} startIcon={<ExitToApp />}>Logar</Button>
           <Button color="primary" onClick={() => history.push('/signup')}>Criar conta</Button>
-          {/* <TextField id="outlined-basic" label="cpf" variant="outlined" /> */}
         </form>
       </div>
     </div>
