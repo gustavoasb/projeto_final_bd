@@ -63,6 +63,10 @@ GEM
     concurrent-ruby (1.1.7)
     cpf_cnpj (0.5.0)
     crass (1.0.6)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.10.0)
     ffi (1.13.1)
     globalid (0.4.2)
@@ -135,7 +139,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    telephone_number (1.4.9)
     thor (1.0.1)
     thread_safe (0.3.6)
     tzinfo (1.2.8)
@@ -152,13 +155,13 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   cpf_cnpj
+  dotenv-rails
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.1)
   spring
   spring-watcher-listen (~> 2.0.0)
-  telephone_number
   tzinfo-data
 
 RUBY VERSION

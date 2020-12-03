@@ -1,4 +1,5 @@
 Rails.application.configure do
+  require 'dotenv/load'
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -58,8 +59,8 @@ Rails.application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'gmail.com',
-    user_name:            'gustavoiristeste@gmail.com',
-    password:             'Itachi1234',
+    user_name:            ENV['SMTP_USER_NAME'],
+    password:             ENV['SMTP_PASSWORD'],
     authentication:       'plain',
   }
    # Change to true to allow email to be sent during development
