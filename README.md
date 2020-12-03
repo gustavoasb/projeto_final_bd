@@ -51,4 +51,12 @@ rails db:schema:dump
    [ERDplus]: <https://erdplus.com/>
    [MySqlWorkbench]: <https://www.mysql.com/products/workbench/>
 
+#### Configurando email para notificações
+
+Crie um arquivo .env dentro da pasta raiz do back. Nele, coloque o seguinte trecho de código, substituindo o que for necessário:
+
+```sh
+SMTP_USER_NAME=<seu_email@gmail.com>
+SMTP_PASSWORD=<senha_do_email>
+```
 
