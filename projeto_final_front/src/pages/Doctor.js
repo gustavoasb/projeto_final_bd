@@ -83,7 +83,7 @@ export default function Doctor() {
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>CRM do Doutor</TableCell>
+                  <TableCell>CPF do Usuário</TableCell>
                   <TableCell align="right">Hora de chegada</TableCell>
                   <TableCell align="right">Posição na Fila</TableCell>
                   <TableCell align="right">Fila</TableCell>
@@ -94,7 +94,7 @@ export default function Doctor() {
                 {entries.map((row) => (
                   <TableRow key={row.id}>
                     <TableCell component="th" scope="row">
-                      {row.doctor_crm}
+                      {row.user_cpf}
                     </TableCell>
                     <TableCell align="right">{row.arrival_time}</TableCell>
                     <TableCell align="right">
